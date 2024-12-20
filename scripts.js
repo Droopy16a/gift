@@ -1,69 +1,34 @@
-// function jiggle(v){
-//     var cube = document.querySelector(".cube");
-//     var divs = cube.querySelectorAll("div")
-
-//     for (var i = 0; i < divs.length; i++){
-//         var el = divs[i];
-//         console.log(el);
-//         if (el.className == "back"){
-//             el.style.transform = `translateZ(${-100 * v}px) rotateY(180deg)`
-//         } else if (el.className == "right"){
-//             el.style.transform = `rotateY(-270deg) translateX(${100 * v}px)`
-//         } else if (el.className == "left"){
-//             el.style.transform = `rotateY(270deg) translateX(${-100 * v}px)`
-//         } else if (el.className == "top"){
-//             el.style.transform = `rotateX(-90deg) translateY(${-100 * v}px)`
-//         } else if (el.className == "bottom"){
-//             el.style.transform = `rotateX(90deg) translateY(${100 * v}px)`
-//         } else{
-//             el.style.transform = `translateZ(${100 * v}px)`
-//         };
-//         el.style.width = `${200 * v}px`;
-//         el.style.height = `${200 * v}px`;
-//     }
-// }
-
 document.addEventListener('DOMContentLoaded', () => {
     const gift = document.getElementById('gift');
     gift.hidden = false;
-    
-    setTimeout(() =>{gift.style.transform = "scale(1)"})
 
-    var isjiggle = false
-    console.log(gift)
+    setTimeout(() => {
+        gift.style.transform = "scale(1)";
+    }, 100); // Add slight delay for initial scale animation
 
     const requiredTaps = 20; // Total taps needed to open the gift
     let currentTaps = 0;
+    let animationTimeout = null; // Store timeout for managing animation
 
-    // Function to get a random reward
-    function getRandomReward() {
-        const randomIndex = Math.floor(Math.random() * rewards.length);
-        return rewards[randomIndex];
-    }
+    // Function to add and remove the zoom-jiggle class
+    function triggerZoomJiggle() {
+        if (animationTimeout) return; // Avoid re-triggering if already animating
 
-    // Function to add and remove the jiggle class
-    function triggerJiggle() {
-        isjiggle = true
-        gift.classList.add('jiggle');
-
-        // Force reflow to restart the animation
-        void gift.offsetWidth;
-
-        // Remove the class after the animation duration (400ms)
-        setTimeout(() => {
-            isjiggle = false
-            gift.classList.remove('jiggle');
-        }, 700);
+        gift.classList.add('zoom-jiggle');
+        animationTimeout = setTimeout(() => {
+            gift.classList.remove('zoom-jiggle');
+            animationTimeout = null;
+        }, 500); // Match the animation duration (500ms)
     }
 
     // Add click event listener to the gift
     gift.addEventListener('click', () => {
         if (gift.classList.contains('open')) return; // Stop if the gift is already open
 
-        currentTaps = Math.min(currentTaps + 1, requiredTaps); // Prevent overflow
+        currentTaps = Math.min(currentTaps + 1, requiredTaps);
 
-        // Trigger the jiggle animation
-        isjiggle ? console.log("non") : triggerJiggle();
+        // Trigger the zoom and jiggle animation
+        triggerZoomJiggle();
 
         // Check if taps are complete
         if (currentTaps >= requiredTaps) {
@@ -71,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gift.classList.add('open');
 
             const dessus = document.getElementsByClassName('cover')[0];
-            dessus.style.transform = "translate(94px, -112px) rotate(45deg)"
+            dessus.style.transform = "translate(94px, -112px) rotate(45deg)";
         }
     });
 });
