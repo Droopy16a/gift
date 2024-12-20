@@ -25,6 +25,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const gift = document.getElementById('gift');
+    gift.hidden = false;
+    
+    setTimeout(() =>{gift.style.transform = "scale(1)"})
+
     var isjiggle = false
     console.log(gift)
 

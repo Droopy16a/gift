@@ -13,6 +13,8 @@ body {
     left:50%;
     margin-left: -150px;
     z-index:10;
+    transform: scale(0.001);
+    transition: 1s;
     &>div{
       background: #e13e3e;
       position: absolute;
