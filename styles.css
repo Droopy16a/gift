@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #34495e;
+    color: #ecf0f1;
+    text-align: center;
+    margin: 0;
+}
+
+.gift{
+    position: absolute;
+    width:300px;
+    height:200px;
+    left:50%;
+    margin-left: -150px;
+    z-index:10;
+    &>div{
+      background: #e13e3e;
+      position: absolute;
+      &:after,&:before{
+        position: absolute;
+        content:"";
+        top: 0;
+      }
+    }
+    &:after{
+      position: absolute;
+      color:#fff;
+      width:100%;
+      left: 0;
+      bottom: 0;
+      font-size: 24px;
+      text-align: center;
+      transform:rotate(-20deg);
+      transform-origin:0 0;
+    }
+    .cover{
+      width:100%;
+      top: 0;
+      left: 0;
+      height:25%;
+      z-index:2;
+      transform: translate(0px, 0px) rotate(0deg);
+      transition: 1s;
+      &:before{
+        position: absolute;
+        height:100%;
+        left: 50%;
+        width:50px;  transform:translateX(-50%);
+        background:#fdc56d;
+      }
+      &>div{
+        position: absolute;
+        width:50px;
+        height:50px;
+        left:50%;
+        top:-50px; transform:translateX(-50%);
+        &:before,&:after{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          content:"";
+          box-shadow:inset 0 0 0 15px #fdc56d;
+          border-radius:30px;
+          transform-origin:50% 100%;
+        }
+        &:before{
+          transform:translateX(-45%) skewY(40deg);
+        }
+        &:after{   transform:translateX(45%) skewY(-40deg);
+        }
+      }
+    }
+    .box{
+      right:5%;
+      left:5%;
+      height:80%;
+      bottom: 0;
+      &:before{ 
+        width:50px;
+        height:100%;
+        left:50%;
+        transform:translateX(-50%);
+        background:#fdc56d;
+      }
+      &:after{
+        left: 0;
+        width:100%;
+        height:30px;
+        background:rgba(0,0,0,0.2);
+      }
+    }
+  }
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.gift.jiggle {
+    animation: jiggle 0.7s ease-in-out;
+}
+
+@keyframes jiggle {
+    0%, 100% { transform: rotate(0); }
+    12.5% { transform: rotate(-10deg); }
+    25% { transform: rotate(10deg); }
+    37.5% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    62.5% { transform: rotate(-10deg); }
+    70% { transform: rotate(10deg); }
+}
+
+.progress-container {
+    width: 80%;
+    max-width: 400px;
+    height: 10px;
+    background-color: #7f8c8d;
+    margin: 20px auto;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #2ecc71;
+    transition: width 0.2s ease;
+}
+
+.reward-container {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #f1c40f;
+}
